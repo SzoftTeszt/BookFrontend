@@ -40,7 +40,7 @@ export class BaseService {
   putBook(body:any){
     this.http.put(this.url+body.id, body).forEach(
       ()=>this.downloadBooks()
-    )got
+    )
   }
 
 

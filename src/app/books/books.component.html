@@ -1,1 +1,40 @@
-<p>books works!</p>
+<!-- Fejléc -->
+<div   class="row my-2">
+    <div class="col" *ngFor="let oszlop of oszlopok">
+        {{oszlop.text}}
+    </div>
+    <div class="col">
+        Műveletek
+    </div>
+</div>
+
+<!-- Új könyv -->
+<div   class="row my-2">
+    <div class="col" *ngFor="let oszlop of oszlopok">
+    <ng-container *ngIf="oszlop.type=='plain'; else inputfield">
+        {{newBook[oszlop.key]}}
+    </ng-container>
+    <ng-template #inputfield>
+        <input [(ngModel)]="newBook[oszlop.key]" [type]="oszlop.type" class="form-control">
+    </ng-template>
+    </div>
+    <div class="col">
+        <button (click)="addBook()" type="button" class="btn btn-primary">Új</button>
+    </div>
+</div>
+
+<!-- KönyvLista  -->
+<div *ngFor="let book of books"   class="row my-2">
+    <div class="col" *ngFor="let oszlop of oszlopok">
+        <ng-container *ngIf="oszlop.type=='plain'; else inputfield">
+            {{book[oszlop.key]}}
+        </ng-container>
+        <ng-template #inputfield>
+            <input [(ngModel)]="book[oszlop.key]" [type]="oszlop.type" class="form-control">
+        </ng-template>
+    </div>
+    <div class="col">
+        <button (click)="updateBook(book)" type="button" class="btn btn-primary">Ment</button>
+        <button (click)="deleteBook(book)" type="button" class="btn btn-primary">Töröl</button>
+    </div>
+</div>
